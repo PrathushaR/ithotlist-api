@@ -23,7 +23,7 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // MongoDB Connection with better error handling
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.NODE_ENV === 'production' ? process.env.MONGODB_URI_PROD : process.env.MONGODB_URI_LOCAL)
   .then(() => {
     console.log('Connected to MongoDB');
   })
